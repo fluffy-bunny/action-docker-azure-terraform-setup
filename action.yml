@@ -18,3 +18,5 @@ runs:
   args:
     - ${{ inputs.shortName }} 
     - ${{ inputs.location }}
+    - ${{ inputs.creds }}
+    
