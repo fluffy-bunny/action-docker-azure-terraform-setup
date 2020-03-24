@@ -16,4 +16,5 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.short-name }} ${{ inputs.location }}
+    - ${{ inputs.short-name }} 
+    - ${{ inputs.location }}
