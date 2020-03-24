@@ -51,9 +51,9 @@ client_id=`echo $creds | jq --raw-output '.clientId'`
 clientSecret=`echo $creds | jq --raw-output '.clientSecret'`
 tenantId=`echo $creds | jq --raw-output '.tenantId'`
 
-echo 'client_id:             '$client_id
-echo 'clientSecret:          '$clientSecret
-echo 'tenantId:              '$tenantId
+echo 'client_id:             '${clientId:0:4}'*********'
+echo 'clientSecret:          '${clientSecret:0:4}'*********'
+echo 'tenantId:              '${tenantId:0:4}'*********'
 
 az login --service-principal -u $client_id -p $clientSecret --tenant $tenantId  
 
