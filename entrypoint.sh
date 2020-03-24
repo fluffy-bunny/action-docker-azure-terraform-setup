@@ -20,15 +20,8 @@ LOCATION=$2
     die
 fi
 
-if grep '^[-0-9a-zA-Z]*$' <<<$SHORT_NAME ;
-  then 
-    SHORT_NAME=${SHORT_NAME,,}
-    echo ok;
-  else 
-    echo $SHORT_NAME must be ALPHANUMERIC;
-    die
-fi
-
+jq --version
+grep --version
 RESOURCE_GROUP_NAME="rg-terraform-$SHORT_NAME"
 CONTAINER_NAME="tstate"
 STORAGE_ACCOUNT_NAME="stterraform$SHORT_NAME"
