@@ -10,8 +10,18 @@ inputs:
     required: true
     default: ''
 outputs:
-  time: # id of output
+  time:  
     description: 'The time we greeted you'
+  storage_account_name:  
+    description: 'The storage_account_name'
+  container_name:  
+    description: 'The container_name name'
+  secret_name:  
+    description: 'The secret_name'
+  keyvault_name:  
+    description: 'The keyvault_name'
+
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
