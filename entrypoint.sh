@@ -61,3 +61,4 @@ az account show
 
 time=$(date)
 echo ::set-output name=time::$time
+ 
