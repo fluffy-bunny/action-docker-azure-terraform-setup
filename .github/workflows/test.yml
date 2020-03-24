@@ -7,28 +7,26 @@ on: # rebuild any PRs and main branch changes
       - 'releases/*'
 
 jobs:
-   hello_world_job:
+   terraform_setup_job:
     runs-on: ubuntu-latest
     steps:
 
     - name: 'github checkout'
       uses: actions/checkout@v1
 
-    - name: Hello world action step
-      id: hello
+    - name: Terraform Setup Step
+      id: tfsetup
       uses: ./
       with:
         shortName: 'lunchMeat'
         location: 'eastus2'
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-    # Use the output from the `hello` step
 
-    - name: Get the output time
+    - name: Get the output tfsetup
       shell: bash
       run: |
-        echo "The time was ${{ steps.hello.outputs.time }}"
-        echo "The storage_account_name was:   '${{ steps.hello.outputs.storage_account_name }}'"
-        echo "The container_name was:         '${{ steps.hello.outputs.container_name }}'"
-        echo "The secret_name was:            '${{ steps.hello.outputs.secret_name }}'"
-        echo "The keyvault_name was:          '${{ steps.hello.outputs.keyvault_name }}'"
+        echo "The storage_account_name was:   '${{ steps.tfsetup.outputs.storage_account_name }}'"
+        echo "The container_name was:         '${{ steps.tfsetup.outputs.container_name }}'"
+        echo "The secret_name was:            '${{ steps.tfsetup.outputs.secret_name }}'"
+        echo "The keyvault_name was:          '${{ steps.tfsetup.outputs.keyvault_name }}'"
         

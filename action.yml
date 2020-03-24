@@ -1,23 +1,34 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
+
   shortName:  # id of input
     description: 'short-name'
     required: true
     default: ''
+
   location:  # id of input
     description: 'location'
     required: true
     default: ''
+
+  creds:  # id of input
+    description: 'AZURE_CREDENTIALS secrets compliant'
+    required: true
+    default: ''
+
+
 outputs:
-  time:  
-    description: 'The time we greeted you'
+
   storage_account_name:  
     description: 'The storage_account_name'
+ 
   container_name:  
     description: 'The container_name name'
+ 
   secret_name:  
     description: 'The secret_name'
+ 
   keyvault_name:  
     description: 'The keyvault_name'
 
