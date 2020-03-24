@@ -1,11 +1,14 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
-  args:  # id of input
-    description: 'space separated args'
+  shortName:  # id of input
+    description: 'short-name'
     required: true
     default: ''
-  
+  location:  # id of input
+    description: 'location'
+    required: true
+    default: ''
 outputs:
   time: # id of output
     description: 'The time we greeted you'
@@ -13,4 +16,5 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.args }} 
+    - ${{ inputs.shortName }} 
+    - ${{ inputs.location }}
