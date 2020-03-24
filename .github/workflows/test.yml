@@ -18,8 +18,8 @@ jobs:
       id: hello
       uses: ./
       with:
-        short-name: 'lunchmeat'
-        location: 'eastus2'
+        args: 'lunchmeat eastus2'
+
     # Use the output from the `hello` step
 
     - name: Get the output time

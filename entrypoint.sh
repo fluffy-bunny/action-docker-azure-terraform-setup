@@ -8,6 +8,10 @@ REQUIRED_ARGS=2
 [ "$#" -eq $REQUIRED_ARGS ] || die "$REQUIRED_ARGS argument required, $# provided"
 
 echo "Positional Parameters"
+
+echo '$1:           '$1
+echo '$2:           '$2
+
 SHORT_NAME=$1
 LOCATION=$2
 
