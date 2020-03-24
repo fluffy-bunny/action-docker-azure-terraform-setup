@@ -15,7 +15,10 @@ echo '$2:           '$2
 SHORT_NAME=$1
 LOCATION=$2
 
- 
+ if [ $length -lt 2 -o $length -gt 13 ] ;then
+    echo "length invalid"
+    die
+fi
 
 RESOURCE_GROUP_NAME="rg-terraform-$SHORT_NAME"
 CONTAINER_NAME="tstate"
