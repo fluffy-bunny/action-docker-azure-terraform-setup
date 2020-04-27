@@ -76,17 +76,30 @@ az group create \
 
 
 echo "====== Creating KEY VAULT:  $KV_NAME ================="
+echo az keyvault create \
+    --location $LOCATION \
+    --name $KV_NAME \
+    --resource-group $RESOURCE_GROUP_NAME \
+    --tags $tags
 az keyvault create \
     --location $LOCATION \
     --name $KV_NAME \
-    --resource-group $RESOURCE_GROUP_NAME
+    --resource-group $RESOURCE_GROUP_NAME \
+    --tags $tags
     
 # Create storage account
+echo az storage account create \
+    --resource-group $RESOURCE_GROUP_NAME \
+    --name $STORAGE_ACCOUNT_NAME \
+    --sku Standard_LRS \
+    --encryption-services blob \
+    --tags $tags
 az storage account create \
     --resource-group $RESOURCE_GROUP_NAME \
     --name $STORAGE_ACCOUNT_NAME \
     --sku Standard_LRS \
-    --encryption-services blob
+    --encryption-services blob \
+    --tags $tags
 
 # Get storage account key
 ACCOUNT_KEY=$(az storage account keys list --resource-group $RESOURCE_GROUP_NAME --account-name $STORAGE_ACCOUNT_NAME --query [0].value -o tsv)
