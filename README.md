@@ -18,6 +18,10 @@ This action prints "Hello World" to the log or "Hello" + the name of a person to
 Please follow these instructions for setting the `"AZURE_CREDENTIALS"`  
 [github actions azure login](https://github.com/Azure/login)  
 
+### `tags`
+
+**Required** key=value key=value pairs ```[NO SPACES IN VALUES]```.   i.e.  ``` tags: 'owner=Firstname_Lastname application=cool-name'```.
+
 
 ## Outputs
 

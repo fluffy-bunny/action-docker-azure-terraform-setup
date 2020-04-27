@@ -17,6 +17,10 @@ inputs:
     required: true
     default: ''
 
+  tags:  # id of input
+    description: 'key value that az cli expects'
+    required: true
+    default: ''
 
 outputs:
 
@@ -40,4 +44,4 @@ runs:
     - ${{ inputs.shortName }} 
     - ${{ inputs.location }}
     - ${{ inputs.creds }}
-    
+    - ${{ inputs.tags }}

@@ -21,6 +21,7 @@ jobs:
         shortName: 'lunchMeat'
         location: 'eastus2'
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+        tags: 'owner=Firstname_Lastname application=cool-name'
 
     - name: Get the output tfsetup
       shell: bash

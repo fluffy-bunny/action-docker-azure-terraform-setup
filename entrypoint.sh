@@ -1,10 +1,10 @@
 #!/bin/sh -l
 die () {
     echo >&2 "$@"
-    echo "$ ./entrypoint.sh [SHORT_NAME] [LOCATION]"
+    echo "$ ./entrypoint.sh [SHORT_NAME] [LOCATION] [CREDS] [TAGS]"
     exit 1
 }
-REQUIRED_ARGS=3
+REQUIRED_ARGS=4
 [ "$#" -eq $REQUIRED_ARGS ] || die "$REQUIRED_ARGS argument required, $# provided"
  bash --version
 echo "Positional Parameters"
@@ -12,10 +12,12 @@ echo "Positional Parameters"
 echo '$1:           '$1
 echo '$2:           '$2
 echo '$3:           '$3
+echo '$4:           '$4
 
 SHORT_NAME=$1
 LOCATION=$2
 creds=$3
+tags=$4
 
 length=${#SHORT_NAME}
 if [ $length -lt 2 -o $length -gt 13 ] ;then
@@ -63,9 +65,14 @@ SUBSCRIPTION_ID="$(az account show --query id -o tsv)"
 echo 'SUBSCRIPTION_ID: '$SUBSCRIPTION_ID
 
 echo "==== Creating Resource Group: $RESOURCE_GROUP_NAME in Location: $LOCATION"
+echo az group create \
+    --name $RESOURCE_GROUP_NAME \
+    --location $LOCATION \
+    --tags $tags
 az group create \
     --name $RESOURCE_GROUP_NAME \
-    --location $LOCATION
+    --location $LOCATION \
+    --tags $tags
 
 
 echo "====== Creating KEY VAULT:  $KV_NAME ================="
