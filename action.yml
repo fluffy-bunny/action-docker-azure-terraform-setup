@@ -1,5 +1,9 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Azure Terraform Setup'
+description: 'based upon https://docs.microsoft.com/en-us/azure/terraform/terraform-backend'
+branding:
+  icon: 'cloud'  
+  color: 'yellow'
+  
 inputs:
 
   shortName:  # id of input

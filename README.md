@@ -1,6 +1,24 @@
 # Terraform State Storage in Azure Setup Action
 
-This action prints "Hello World" to the log or "Hello" + the name of a person to greet. To learn how this action was built, see "[Creating a Docker container action](https://help.github.com/en/articles/creating-a-docker-container-action)" in the GitHub Help documentation.
+To learn how this action was built, see "[Creating a Docker container action](https://help.github.com/en/articles/creating-a-docker-container-action)" in the GitHub Help documentation.
+
+This action was based on the following tutorial;  
+[Store Terraform state in Azure Storage](https://docs.microsoft.com/en-us/azure/terraform/terraform-backend) 
+
+A dedicated resource group `"rg-terraform-<shortname>"` will contain the following resources;  
+### A Key Vault
+`"kv-tf-<shortname>"`
+### A Storage Account
+`"stterraform<shortname>"` **storage accounts have naming restrictions lowercase alphanumeric 24 long **  
+
+A container call `"tfstate"` which terrafrom will use to store its state.  
+For terraform to work, we will store the storage account key in our key vault named `"terraform-backend-key"`  
+When using terraform you will need to export the key as such;
+```bash
+export ARM_ACCESS_KEY=$(az keyvault secret show --name terraform-backend-key --vault-name kv-tf-<shortname> --query value -o tsv)
+```
+
+
 
 ## Inputs
 
@@ -81,4 +99,34 @@ You have to first so an `"az login"` with an account that has access to the stor
 
 ```bash
 export ARM_ACCESS_KEY=$(az keyvault secret show --name terraform-backend-key --vault-name kv-tf-<short-name> --query value -o tsv)
+```
+I use a service principal that has access to create resources so I export the following as well; 
+```bash
+export ARM_CLIENT_ID="00000000-0000-0000-0000-00000000"
+export ARM_CLIENT_SECRET= "00000000-0000-0000-0000-00000000"
+export ARM_SUBSCRIPTION_ID="00000000-0000-0000-0000-00000000"
+export ARM_TENANT_ID="00000000-0000-0000-0000-00000000"
+```
+
+Here is a terraform example; 
+```
+terraform {
+  backend "azurerm" {
+    # Due to a limitation in backend objects, variables cannot be passed in.
+    # Do not declare an access_key here. Instead, export the
+    # ARM_ACCESS_KEY environment variable.
+
+    storage_account_name  = "stterraformheidi"
+    container_name        = "tstate"
+    key                   = "terraform.tfstate"
+  }
+}
+# Configure the Azure provider
+provider "azurerm" {
+  version = "=1.44.0"
+}
+resource "azurerm_resource_group" "rg" {
+  name     = var.az_resource_group_name
+  location = var.az_resource_group_location
+}
 ```
